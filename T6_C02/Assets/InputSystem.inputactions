@@ -1,0 +1,34 @@
+{
+    "name": "InputSystem",
+    "maps": [
+        {
+            "name": "TeleportMap",
+            "id": "10d7ffcc-76c3-4617-b776-7764191ae136",
+            "actions": [
+                {
+                    "name": "TeleportPlayer",
+                    "type": "Button",
+                    "id": "48752b55-f066-4e3a-94b7-440f795e83cd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bfab45ab-4137-4613-b9e1-795e5304c1cd",
+                    "path": "<XRController>{LeftHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TeleportPlayer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
