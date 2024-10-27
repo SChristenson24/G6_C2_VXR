@@ -19,7 +19,7 @@
                 {
                     "name": "",
                     "id": "bfab45ab-4137-4613-b9e1-795e5304c1cd",
-                    "path": "<XRController>{LeftHand}/{GripButton}",
+                    "path": "<QuestProTouchController>/triggerPressed",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

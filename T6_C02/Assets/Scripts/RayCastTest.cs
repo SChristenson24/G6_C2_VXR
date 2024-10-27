@@ -5,47 +5,53 @@ using UnityEngine.VFX;
 using UnityEngine.InputSystem;
 using JetBrains.Annotations;
 using UnityEngine.InputSystem.HID;
+using UnityEngine.UI;
 
 public class RayCastTest : MonoBehaviour
 {
     // Ray
     Ray ray;
 
+    // Test Text
+    public Text scoreText;
+    public float scoreCount;
+
     // Reference to Action
     public InputActionReference TeleportAction;
+
     // Camera
     private Camera m_MainCamera;
 
     private void Awake()
     {
         // Enables Action
-        //TeleportAction.action.Enable();
+        TeleportAction.action.Enable();
 
+        // Function Call to send to next step
         TeleportAction.action.started += CheckForColliders;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        // Ray Initialization
-        ray = new Ray(transform.position, transform.forward);
-
         // Initial Camera Position
         m_MainCamera = Camera.main;
-        
-        // Enables Action
-        //TeleportAction.action.Enable();
     }
 
     private void OnDestroy()
     {
+        // Destructor
         TeleportAction.action.started -= CheckForColliders;
     }
 
 
     void CheckForColliders(InputAction.CallbackContext context)
     {
+        // Ray initialization
         ray = new Ray(transform.position, transform.forward);
+
+        scoreCount++;
+        scoreText.text = "Score: " + scoreCount;
 
         // Deploy Ray
         if (Physics.Raycast(ray, out RaycastHit hit))

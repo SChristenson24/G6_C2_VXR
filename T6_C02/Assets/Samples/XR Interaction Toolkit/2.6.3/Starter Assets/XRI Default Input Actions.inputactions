@@ -2758,7 +2758,7 @@
                 {
                     "name": "",
                     "id": "63a8bcd7-5d79-4a1d-ac8e-7a8e014e3320",
-                    "path": "<QuestProTouchController>/primaryButton",
+                    "path": "<QuestProTouchController>/triggerPressed",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
