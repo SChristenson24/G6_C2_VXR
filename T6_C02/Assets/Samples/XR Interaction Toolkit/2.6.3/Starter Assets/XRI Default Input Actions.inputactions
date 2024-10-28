@@ -783,7 +783,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Menu",
+                    "name": "TeleportButton",
                     "type": "Button",
                     "id": "018a04e6-1bfd-4093-a1b7-d5d850727ae3",
                     "expectedControlType": "Button",
@@ -961,11 +961,11 @@
                 {
                     "name": "",
                     "id": "86748d84-6c05-4429-80d1-5302919cc8f6",
-                    "path": "<XRController>{LeftHand}/{MenuButton}",
+                    "path": "<XRController>{LeftHand}/{TriggerButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
-                    "action": "Menu",
+                    "action": "TeleportButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -26,8 +26,8 @@ public class RayCastTest : MonoBehaviour
         // Enables Action
         TeleportAction.action.Enable();
 
-        // Function Call to send to next step
-        TeleportAction.action.performed += teleportRay;
+        // Call to function for teleport
+        TeleportAction.action.canceled += teleportCharacter;
     }
 
     // Start is called before the first frame update
@@ -41,11 +41,20 @@ public class RayCastTest : MonoBehaviour
     {
         // Destructor
         TeleportAction.action.Disable();
-        TeleportAction.action.performed -= teleportRay;
+        //TeleportAction.action.performed -= teleportRay;
+        TeleportAction.action.performed -= teleportCharacter;
     }
 
-
-    void teleportRay(InputAction.CallbackContext context)
+    private void Update()
+    {
+        // Checks for trigger press
+        if (TeleportAction.action.IsPressed())
+        {
+            // Function call to draw a ray
+            teleportRay();
+        }
+    }
+    void teleportRay()
     {
         // Ray initialization
         ray = new Ray(transform.position, transform.forward);
@@ -58,18 +67,34 @@ public class RayCastTest : MonoBehaviour
 
             // Display Ray
             Debug.DrawRay(transform.position, transform.forward * 10, Color.red);
+        }
+
+        // Debug Log
+        else
+        {
+            Debug.Log("Raycast did not hit anything");
+        }
+    }
+
+    void teleportCharacter(InputAction.CallbackContext context)
+    {
+        // Ray initialization
+        ray = new Ray(transform.position, transform.forward);
+
+        // Deploy Ray
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            // Check For Hit
+            Debug.Log("Hit: " + hit.collider.name);
 
             // Get Camera Y-Coords
             float cameraposY = m_MainCamera.transform.position.y;
 
             // Teleport Camera With Adjusted Y
             //teleportPanel.transform.position = new Vector3(hit.point.x, cameraposY, hit.point.z);
-            teleportPanel.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-        }
 
-        else
-        {
-            Debug.Log("Raycast did not hit anything");
+            // Teleport Character
+            teleportPanel.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
         }
     }
 }
