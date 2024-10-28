@@ -12,15 +12,14 @@ public class RayCastTest : MonoBehaviour
     // Ray
     Ray ray;
 
-    // Test Text
-    public Text scoreText;
-    public float scoreCount;
-
     // Reference to Action
     public InputActionReference TeleportAction;
 
     // Camera
     private Camera m_MainCamera;
+
+    // GameObject for Rig
+    public GameObject teleportPanel;
 
     private void Awake()
     {
@@ -28,7 +27,7 @@ public class RayCastTest : MonoBehaviour
         TeleportAction.action.Enable();
 
         // Function Call to send to next step
-        TeleportAction.action.started += CheckForColliders;
+        TeleportAction.action.performed += teleportRay;
     }
 
     // Start is called before the first frame update
@@ -41,17 +40,15 @@ public class RayCastTest : MonoBehaviour
     private void OnDestroy()
     {
         // Destructor
-        TeleportAction.action.started -= CheckForColliders;
+        TeleportAction.action.Disable();
+        TeleportAction.action.performed -= teleportRay;
     }
 
 
-    void CheckForColliders(InputAction.CallbackContext context)
+    void teleportRay(InputAction.CallbackContext context)
     {
         // Ray initialization
         ray = new Ray(transform.position, transform.forward);
-
-        scoreCount++;
-        scoreText.text = "Score: " + scoreCount;
 
         // Deploy Ray
         if (Physics.Raycast(ray, out RaycastHit hit))
@@ -66,7 +63,8 @@ public class RayCastTest : MonoBehaviour
             float cameraposY = m_MainCamera.transform.position.y;
 
             // Teleport Camera With Adjusted Y
-            m_MainCamera.transform.position = new Vector3(hit.point.x, cameraposY, hit.point.z);
+            //teleportPanel.transform.position = new Vector3(hit.point.x, cameraposY, hit.point.z);
+            teleportPanel.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z);
         }
 
         else
